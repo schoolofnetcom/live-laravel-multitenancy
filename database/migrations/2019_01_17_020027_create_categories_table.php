@@ -23,6 +23,10 @@ class CreateCategoriesTable extends Migration
         });
     }
 
+    //empresa
+
+    //usuarios
+
     /**
      * Reverse the migrations.
      *

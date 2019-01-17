@@ -14,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        //\Tenant::setTenant(auth()->user());
         $categories = Category::all();
+        //$categories = Category::where('user_id', '=', auth()->user()->id)->get();
         return view('app.category.index', compact('categories'));
     }
 
@@ -36,11 +38,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        Category::create(
-            $request->all() + [
-                'user_id' => auth()->user()->id
-            ]
-        );
+        Category::create($request->all());
         return redirect()->route('categories.index');
     }
 
@@ -52,6 +50,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+//        if($category->user_id != auth()->user()->id){
+//            abort(403, 'Esta categoria não é sua');
+//        }
         return view('app.category.show', compact('category'));
     }
 
@@ -61,8 +62,13 @@ class CategoryController extends Controller
      * @param  \App\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    //Category::where('user_id', 1)->findOrFail(2);
+    public function edit(Category $category) //Route Model Binding
     {
+//        if($category->user_id != auth()->user()->id){
+//            abort(403, 'Esta categoria não é sua');
+//        }
+
         return view('app.category.edit', compact('category'));
     }
 

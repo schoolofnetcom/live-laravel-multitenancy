@@ -7,6 +7,6 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'name' => $faker->name,
         'description' => $faker->sentence,
         'price' => $faker->randomFloat(2,100,1000),
-        'user_id' => rand(1,2)
+        //'user_id' => rand(1,2)
     ];
 });

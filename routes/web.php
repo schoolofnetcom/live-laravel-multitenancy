@@ -19,5 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('categories', 'CategoryController');
-Route::resource('products', 'ProductController');
+Route::group(['middleware' => ['auth', 'tenant']], function(){
+    Route::resource('categories', 'CategoryController');
+    Route::resource('products', 'ProductController');
+});
+
+Route::group(['prefix' => 'admin'], function(){
+   //tenant
+});
